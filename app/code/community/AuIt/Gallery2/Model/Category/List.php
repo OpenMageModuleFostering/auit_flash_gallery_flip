@@ -25,6 +25,7 @@ class AuIt_Gallery2_Model_Category_List  extends AuIt_Gallery2_Model_Category_Ab
     {
         $attributes = Mage::getSingleton('catalog/config')
             ->getProductAttributes();
+        $attributes[]='image';
         $collection->addAttributeToSelect($attributes)
             ->addMinimalPrice()
             ->addFinalPrice()

@@ -14,9 +14,9 @@ abstract class AuIt_Gallery2_Model_Category_Abstract extends Mage_Core_Model_Abs
     	$picHeight = (int)$request->getParam('picture_height',184);
     	if ( $picHeight <= 0 ) $picHeight=184;
     	$picType = $request->getParam('picture_type','small_image');
-    	if ( $picType != 'image' && $picType != 'small_image' && $picType != 'thumbnail'  )
+    	if (  $picType != 'image' && $picType != 'small_image' && $picType != 'thumbnail'  )
     		$picType='small_image';
-    		
+
     	$max = (int)$request->getParam('max_products',10);
     	if ( $max <= 0 ) $max=10;
     	$iHelper = Mage::helper('catalog/image');
@@ -26,7 +26,7 @@ abstract class AuIt_Gallery2_Model_Category_Abstract extends Mage_Core_Model_Abs
 		{
 			$url= ''.$iHelper->init($_product, $picType)
                     ->keepFrame(false)->resize($picWidth,$picHeight);
-           
+
 			if ($url!='')
 			{ 
 				$NTmp = $xml->addChild('item');

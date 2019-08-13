@@ -128,8 +128,8 @@ abstract class AuIt_Gallery2_Block_Flash_Abstract extends Mage_Core_Block_Templa
 							"<?php echo $this->flashattributes['width'];?>", 
 							"<?php echo $this->flashattributes['height'];?>", 
 							"9.0.0", null, 
-							<?php echo json_encode($this->modelParam);?>,
-							<?php echo json_encode($this->flashparam);?>, <?php echo json_encode($this->flashattributes);?>);
+							<?php echo Zend_Json::encode($this->modelParam);?>,
+							<?php echo Zend_Json::encode($this->flashparam);?>, <?php echo Zend_Json::encode($this->flashattributes);?>);
 </script>
 <?    	
     	return ob_get_clean();
