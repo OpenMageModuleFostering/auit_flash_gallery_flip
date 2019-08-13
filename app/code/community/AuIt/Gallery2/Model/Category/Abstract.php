@@ -102,7 +102,7 @@ abstract class AuIt_Gallery2_Model_Category_Abstract extends Mage_Core_Model_Abs
     {
         return 'auit_de_gallery_'.$this->_cacheKey;
     }
-    protected function getCacheTags()
+    public function getCacheTags()
     {
 		$tags = array();
         $tags[] = 'auit_de_data';
