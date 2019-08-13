@@ -3,12 +3,47 @@ abstract class AuIt_Gallery2_Model_Category_Abstract extends Mage_Core_Model_Abs
 {
 	protected $_feprod;
 	protected $_cacheKey;
-    public function __construct()
+	protected $_priceBlock;
+	protected $_htmlBlock;
+	public function __construct()
     {
     	parent::__construct();
     }
-    private function buildXMl(Mage_Core_Controller_Request_Http $request,&$xml,$_productCollection)
+    private function codingXML($text)
     {
+    	$text = str_replace('&amp;','[AMPAMP]',$text);
+    	$text = str_replace('&','&amp;',$text);
+    	return str_replace('[AMPAMP]','&amp;',$text);
+    }
+    private function addTemplate(Mage_Core_Controller_Request_Http $request)
+    {
+    	$xml='<template>';
+    	$templates  = $request->getParam('template','');
+    	if ( !$templates )
+    		$templates='default';
+    	if ( $templates )
+    	{
+    		$dir = dirname(__FILE__)."/../../templates/$templates/";
+    		if ( file_exists($dir.'view.phtml') )
+    		{
+    		//	$xml .= '<box><![CDATA[';
+    		//	$xml .= file_get_contents($dir.'view.phtml');
+    			//$xml .= ']]></box>';
+    		}
+    		if ( file_exists($dir.'default.css') )
+    		{
+    			$xml .= '<css><![CDATA[';
+    			$xml .= file_get_contents($dir.'default.css');
+    			$xml .= ']]></css>';
+    		}
+    	}
+    	$xml.='</template>';
+    	return $xml;
+    }
+    private function buildXMl(Mage_Core_Controller_Request_Http $request,$_productCollection)
+    {
+    	$xml='';
+    
     	$picWidth  = (int)$request->getParam('picture_width',230);
     	if ( $picWidth <= 0 ) $picWidth=230;
     	$picHeight = (int)$request->getParam('picture_height',184);
@@ -26,19 +61,39 @@ abstract class AuIt_Gallery2_Model_Category_Abstract extends Mage_Core_Model_Abs
 		{
 			$url= ''.$iHelper->init($_product, $picType)
                     ->keepFrame(false)->resize($picWidth,$picHeight);
-
 			if ($url!='')
 			{ 
-				$NTmp = $xml->addChild('item');
-				$NTmp->addChild('image',$url);
-				$NTmp->addChild('name',htmlentities ($_product->getName(),ENT_COMPAT ,'UTF-8'));
-				$NTmp->addChild('short',$_product->getshortDescription());
-				$NTmp->addChild('link',$_product->getProductUrl());
+				$xml.='<item>';
+				$xml.='<image>'.$url.'</image>';
+				$xml.='<name><![CDATA['.$_product->getName().']]></name>';
+				$xml.='<short><![CDATA['.$_product->getshortDescription().']]></short>';
+				$xml.='<link>'.$_product->getProductUrl().'</link>';
+//				$xml.='<price><![CDATA['.str_replace(Array("\n","\t",''),'',$this->getPriceHtml($_product,true)).']]></price>';
+				$xml.='<html><![CDATA['.str_replace(Array("\n","\t",''),'',$this->getHtml($_product,true)).']]></html>';
+				$xml.='</item>';
 				$max--;
 				if ( !$max ) break;
 			}
 		}
-		
+		return $xml;
+    }
+    /**
+    public function getPriceHtml($product, $displayMinimalPrice = false, $idSuffix='')
+    {
+    	if ( !$this->_priceBlock )
+    	{
+        	$this->_priceBlock = Mage::getSingleton('core/layout')->createBlock('catalog/product_list');
+    	}
+        return str_replace(Array("<div","</div"),Array('<p','</p'),$this->_priceBlock->getPriceHtml($product, $displayMinimalPrice, $idSuffix));
+    }
+    */
+    public function getHtml($product, $displayMinimalPrice = false, $idSuffix='')
+    {
+    	if ( !$this->_htmlBlock )
+    	{
+        	$this->_htmlBlock = Mage::getSingleton('core/layout')->createBlock('auit_gallery2/product_view');
+    	}
+        return $this->_htmlBlock->getFlashHtml($product);
     }
     protected function getCacheKey()
     {
@@ -74,14 +129,17 @@ abstract class AuIt_Gallery2_Model_Category_Abstract extends Mage_Core_Model_Abs
     public function getXML(Mage_Core_Controller_Request_Http $request)
     {
     	$this->_cacheKey = crc32($request->getRequestUri());
-    	if (!($data = $this->_loadCache())) 
+    	if (!($xml = $this->_loadCache())) 
     	{
-			$xml = new SimpleXMLElement("<?xml version='1.0'  encoding='utf-8'?><data></data>");
-	    	$this->buildXMl($request,$xml,$this->_getProductCollection($request));
-			$data = $xml->asXML();
-    		$this->_saveCache($data);
+        	$xml = '';
+            $xml.= '<?xml version="1.0" encoding="UTF-8"?>'."\n";
+    		$xml.= '<data>';
+    		$xml.= $this->addTemplate($request);
+    		$xml.= $this->buildXMl($request,$this->_getProductCollection($request));
+    		$xml.= '</data>';
+    		$this->_saveCache($xml);
     	}
-    	return $data;
+    	return $xml;
     }
     abstract protected function _getProductCollection(Mage_Core_Controller_Request_Http $request);
 	protected function _shuffle()

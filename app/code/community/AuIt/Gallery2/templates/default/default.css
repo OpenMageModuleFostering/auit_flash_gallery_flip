@@ -1,0 +1,39 @@
+/*
+	Flash Player supports a subset of properties 
+	http://livedocs.adobe.com/flash/9.0/ActionScriptLangRefV3/flash/text/StyleSheet.html
+*/
+.text
+{
+	font-family:Arial;
+	color:#eeeeee;
+    font-size: 11px;
+	margin-left:5px;
+	margin-right:5px;
+}
+.price-box
+{
+	color:#eeeeee;
+	text-align:right;
+	margin-right:5px;
+    font-size: 9px;
+}
+.price {
+	font-family:Arial;
+	color:#ff0000;
+    font-size: 12px;
+	font-weight: bold;
+}
+.old-price
+{
+    font-size: 9px;
+}
+.special-price
+{
+	color:#ffff00;
+    font-size: 10px;
+    font-weight: bold;
+}
+.regular-price
+{
+    font-weight: bold;
+}

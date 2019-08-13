@@ -1,0 +1,20 @@
+<?php
+    $_helper = $this->helper('catalog/output');
+    $_product = $this->getProduct();
+?>
+<p class="text"><?php echo $_helper->productAttribute($_product, $this->htmlEscape($_product->getName()), 'name') ?></p>
+<?php echo $this->getPriceHtml($_product, true) ?>
+<?php 
+/*
+<p class="text">Flash Gallery -  Accordion</p>
+<p class="price-box">
+		<span class="regular-price" id="product-price-1">
+			<span class="price">29,00 €</span>
+		</span>
+		<small>Inkl. Steuern</small>
+		<small>
+			<span class="price" id="auit-basis-price-1"></span>
+		</small>
+</p>
+*/
+?>

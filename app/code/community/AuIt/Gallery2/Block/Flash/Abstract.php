@@ -106,7 +106,10 @@ abstract class AuIt_Gallery2_Block_Flash_Abstract extends Mage_Core_Block_Templa
    // 	$this->flashattributes['width']='1';
 	//	$this->flashattributes['height']='2';
     	$this->modelParam['dataurl']=$this->getUrl('au-it-gallery2/index/xml',$this->modelData);
-		ob_start();
+		$this->modelParam['stagewidth']=$this->flashattributes['width'];
+		$this->modelParam['stageheight']=$this->flashattributes['height'];
+    	
+    	ob_start();
 		if ( !self::$_isInit  )
 		{
 			self::$_isInit =true;?>
@@ -121,7 +124,6 @@ abstract class AuIt_Gallery2_Block_Flash_Abstract extends Mage_Core_Block_Templa
 	<?php if ( $this->flashattributes['frame_style'] !=''):?>
 	</div>
 	<?php endif;?>
-
 <script  type="text/javascript" >
         swfobject.embedSWF(	"<?php echo $_jsUrl ?>auit/gallery2/swf/<?php echo $this->flashSwf;?>", 
 							"swf<?php echo $ObjId?>", 
@@ -131,7 +133,7 @@ abstract class AuIt_Gallery2_Block_Flash_Abstract extends Mage_Core_Block_Templa
 							<?php echo Zend_Json::encode($this->modelParam);?>,
 							<?php echo Zend_Json::encode($this->flashparam);?>, <?php echo Zend_Json::encode($this->flashattributes);?>);
 </script>
-<?    	
-    	return ob_get_clean();
+<?php   	
+		return ob_get_clean();
     }
 }
