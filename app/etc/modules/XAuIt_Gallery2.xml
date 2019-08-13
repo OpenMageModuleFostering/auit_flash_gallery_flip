@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+      <AuIt_Gallery2>
+        <active>true</active>
+        <codePool>community</codePool>
+      </AuIt_Gallery2>	 
+    </modules>
+</config>

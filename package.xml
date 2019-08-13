@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package>
+    <name>AuIt_FLASH_GALLERY_FLIP</name>
+    <version>1.2.2</version>
+    <stability>stable</stability>
+    <license uri="http://www.opensource.org/licenses/osl-3.0.php">Open Software License (OSL)</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>Flash gallery, simple integration</summary>
+    <description>This Flash gallery can be integrated in various ways. The representation can be adapted by an abundance of parameter to the own web page.
+
+More flash galleries?  Can be found on the website http://www.snm-portal.de</description>
+    <notes>Inital</notes>
+    <authors><author><name>Augsten</name><user>auto-converted</user><email>muc6104@googlemail.com</email></author></authors>
+    <date>2009-06-07</date>
+    <time>12:51:35</time>
+    <contents><target name="magecommunity"><dir name="AuIt"><dir name="Gallery2"><dir name="Block"><dir name="Flash"><file name="Abstract.php" hash="3598a25b44fa3d674277427e400dd22c"/><file name="Accordion.php" hash="f7ddfbbfb1aff2a7644cfa1824dc9cc9"/><file name="Flip.php" hash="9d6eedcfdd89443b5fc59931123b3c23"/><file name="Pageflip.php" hash="1dacf4c5a1a97852191c5fb33fef9679"/><file name="Photo.php" hash="b8151c7dc94f6bba8dd82aa1312aea6d"/></dir></dir><dir name="controllers"><file name="IndexController.php" hash="52d7180d7430bcad024160f5dc8d8d35"/></dir><dir name="etc"><file name="config.xml" hash="6242188b616933d17c84f7170b93f962"/></dir><dir name="Helper"><file name="Data.php" hash="a3c58c7a46dd6da06bb998ed0936207f"/></dir><dir name="Model"><dir name="Category"><file name="Abstract.php" hash="63135d3f3634901e370a542d98c05898"/><file name="Bestseller.php" hash="446bd8dafbb52abbbee61929f2768628"/><file name="List.php" hash="86add8640f8db250b45462ff9f857292"/><file name="Mostviewed.php" hash="55c086490e8b282a74d34671491232f9"/><file name="New.php" hash="2c08979e24797f63ef6d23cb1abb73af"/></dir></dir></dir></dir></target><target name="mage"><dir name="js"><dir name="auit"><dir name="gallery2"><dir name="swf"><dir name="assets"><file name="Arial.swf" hash="9e4b288ca0adfff3e7816c14780f528a"/><file name="Comic Sans MS.swf" hash="24e641848e5947b972ee9d9c56935813"/></dir><file name="accordion.swf" hash="56875c879c923d19e5d8d65cb535b48d"/><file name="flip.swf" hash="029eed4bcb53c7dd50e7630f9ed05ea0"/><file name="pageflip.swf" hash="3d05f10eac9c015aada13957660b632a"/><file name="photo.swf" hash="b1869cc7f46581cfcd6658685ddd87f3"/><file name="swfobject.js" hash="eaa5417940c71f441b016b12c534665d"/></dir></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="XAuIt_Gallery2.xml" hash="7ca7828811ddb938dd11d27ac953ffce"/></dir></target></contents>
+    <compatible/>
+    <dependencies/>
+</package>
