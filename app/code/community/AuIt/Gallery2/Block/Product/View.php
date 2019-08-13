@@ -33,8 +33,8 @@ class AuIt_Gallery2_Block_Product_View extends Mage_Catalog_Block_Product_Abstra
     public function renderView()
     {
         Varien_Profiler::start(__METHOD__);
-        $this->setScriptPath(dirname(__FILE__).'/../../templates');
-//        $this->setScriptPath(Mage::getBaseDir('design'));
+        $baseDir = Mage::getBaseDir() . DS . 'app'. DS .'code'. DS .'community'. DS .'AuIt'. DS . 'Gallery2';
+        $this->setScriptPath($baseDir. DS .'templates');
         $params = array('_relative'=>true);
         if ($area = $this->getArea()) {
             $params['_area'] = $area;

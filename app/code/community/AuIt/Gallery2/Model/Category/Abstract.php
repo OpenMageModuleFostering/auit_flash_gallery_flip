@@ -23,7 +23,8 @@ abstract class AuIt_Gallery2_Model_Category_Abstract extends Mage_Core_Model_Abs
     		$templates='default';
     	if ( $templates )
     	{
-    		$dir = dirname(__FILE__)."/../../templates/$templates/";
+        	$baseDir = Mage::getBaseDir() . DS . 'app'. DS .'code'. DS .'community'. DS .'AuIt'. DS . 'Gallery2';
+    		$dir = $baseDir. DS .'templates'. DS .$templates. DS;
     		if ( file_exists($dir.'view.phtml') )
     		{
     		//	$xml .= '<box><![CDATA[';
@@ -59,6 +60,8 @@ abstract class AuIt_Gallery2_Model_Category_Abstract extends Mage_Core_Model_Abs
     	if ( $_productCollection )
     	foreach ($_productCollection as $_product)
 		{
+			if ( $_product->getStatus() != Mage_Catalog_Model_Product_Status::STATUS_ENABLED )
+				continue;
 			$url= ''.$iHelper->init($_product, $picType)
                     ->keepFrame(false)->resize($picWidth,$picHeight);
 			if ($url!='')
@@ -128,7 +131,7 @@ abstract class AuIt_Gallery2_Model_Category_Abstract extends Mage_Core_Model_Abs
     }
     public function getXML(Mage_Core_Controller_Request_Http $request)
     {
-    	$this->_cacheKey = crc32($request->getRequestUri());
+    	$this->_cacheKey = crc32($request->getRequestUri().Mage::app()->getStore()->getId());
     	if (!($xml = $this->_loadCache())) 
     	{
         	$xml = '';

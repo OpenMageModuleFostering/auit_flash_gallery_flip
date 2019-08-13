@@ -7,7 +7,6 @@ class AuIt_Gallery2_Block_Jscript_Slider extends AuIt_Gallery2_Block_Flash_Abstr
 	protected function initParams()
     {
     	parent::initParams();
-		$this->modelParam['startpage']=0;
     	$this->flashattributes['width']=195;
 		$this->flashattributes['height']=195;
     }
@@ -40,7 +39,6 @@ class AuIt_Gallery2_Block_Jscript_Slider extends AuIt_Gallery2_Block_Flash_Abstr
         //return $model->getXML($Request);
     	//$xmlData = simplexml_load_string($this->htmlentities_decode($model->getXML($Request)));
     	$xmlData = simplexml_load_string($model->getXML($Request));
-		$StartPage=$this->modelParam['startpage']-1;
     	ob_start();
 ?>
 <div class="featured" style="<?php echo $this->flashattributes['frame_style'];?>">
@@ -53,7 +51,6 @@ class AuIt_Gallery2_Block_Jscript_Slider extends AuIt_Gallery2_Block_Flash_Abstr
 //		echo $item->short;
 	$pcw= $this->modelData['picture_width'];
     $pch=$this->modelData['picture_height'];
-	
   foreach($xmlData->item as $item) {
 ?>
     <div>
@@ -87,18 +84,13 @@ jQuery.easing.feature = function (x, t, b, c, d) {
 
 jQuery(function() {
 	// initialize scrollable
-	var x = jQuery("div.scrollable").scrollable({
-	api:true,
+	jQuery("div.scrollable").scrollable({
     size: 3,
     clickable: false,
     loop: true,
     easing: 'feature',
     speed: 700
   });
-<?php if ( $StartPage >= 0 ) :?>
-	if ( x ) 
-		x.setPage(<?php echo $StartPage?>);
-<?php endif;?>
 });
 
 </script>
