@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/AuIt_FLASH_GALLERY_FLIP",
+    "name": "OpenMageModuleFostering\/AuIt_FLASH_GALLERY_FLIP",
     "type": "magento-module",
     "license": "Open-Software-License-(OSL)",
     "homepage": "",
     "description": "Flash gallery, simple integration",
     "authors": [
-    {
-        "name": "Augsten",
-        "email": "muc6104@googlemail.com"
-    }
-],
+        {
+            "name": "Augsten",
+            "email": "muc6104@googlemail.com"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
